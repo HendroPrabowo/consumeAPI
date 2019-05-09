@@ -1,0 +1,75 @@
+﻿@model ConsumeAPICore.Models.RequestViewModel
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Detail</h2>
+
+<div>
+    <h4>Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.booking_start)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.booking_start)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.booking_end)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.booking_end)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.booking_permission)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.booking_permission)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.booking_status)
+        </dt>
+        <dd>
+            @{
+                if (Model.booking_status == 0)
+                {
+                    Write("Pending");
+                }
+                else if (Model.booking_status == 1)
+                {
+                    Write("Accepted");
+                }
+                else
+                {
+                    Write("Rejected");
+                }
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.cars_id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.cars_id)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.users_id)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.users_id)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Accept", "accept", new { id = Model.Id }) |
+    @Html.ActionLink("Reject", "reject", new { id = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>

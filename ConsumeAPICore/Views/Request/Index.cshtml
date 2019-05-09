@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ConsumeAPICore.Models.RequestViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 1;
+}
+
+<h2>List All Request</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                No.
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.booking_start)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.booking_end)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.booking_permission)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.booking_status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cars_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.users_id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @{ 
+                    Write(i);
+                    i++;
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.booking_start)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.booking_end)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.booking_permission)
+            </td>
+            <td>
+                @{ 
+                    if(item.booking_status == 0)
+                    {
+                        Write("Pending");
+                    }
+                    else if(item.booking_status == 1)
+                    {
+                        Write("Accepted");
+                    }
+                    else
+                    {
+                        Write("Rejected");
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cars_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.users_id)
+            </td>
+            <td>
+                @Html.ActionLink("Accept", "accept", new { id = item.Id }) |
+                @Html.ActionLink("Reject", "reject", new { id = item.Id }) |
+                @Html.ActionLink("Detail", "detail", new { id = item.Id })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
